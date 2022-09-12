@@ -1,0 +1,25 @@
+{
+  "name": "hdu-lis",
+  "version": "1.0.0",
+  "description": "lif is short, you need lis:)",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarleneJiang/hdu-lis.git"
+  },
+  "keywords": [
+    "hdu"
+  ],
+  "author": "Marlene",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarleneJiang/hdu-lis/issues"
+  },
+  "homepage": "https://github.com/MarleneJiang/hdu-lis#readme",
+  "dependencies": {
+    "qs": "^6.11.0"
+  }
+}
