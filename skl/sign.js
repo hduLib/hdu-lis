@@ -24,7 +24,7 @@ async function sklSign(username,password) {
       'skl-ticket': getRandomString(21)
     }
   })
-  return res
+  return res.status
 }
 
 
