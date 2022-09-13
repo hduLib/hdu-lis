@@ -1,5 +1,5 @@
 const {casLogin} = require("../cas/casLogin");
-
+const fetch = require('node-fetch');
 
 
 async function getCasLoginUrl(){

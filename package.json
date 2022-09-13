@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/MarleneJiang/hdu-lis#readme",
   "dependencies": {
+    "node-fetch": "^2.6.7",
     "qs": "^6.11.0"
   }
 }

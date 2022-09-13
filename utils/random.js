@@ -2,9 +2,9 @@ function getRandomString(len) {
     let _charStr = 'abacdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789',
         min = 0,
         max = _charStr.length - 1,
-        _str = '';                    //定义随机字符串 变量
-    //判断是否指定长度，否则默认长度为15
-    len = len || 15;
+        _str = '';//定义随机字符串 变量
+    //判断是否指定长度，否则默认长度为21
+    len = len || 21;
     //循环生成字符串
     for (var i = 0, index; i < len; i++) {
         index = (function (randomIndexFunc, i) {

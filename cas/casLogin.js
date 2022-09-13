@@ -1,5 +1,6 @@
 const { strEnc } = require("../utils/des.js");
 const qs = require("qs");
+const fetch = require('node-fetch');
 
 async function casLogin(url, username, password) {
   try {

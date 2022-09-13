@@ -1,5 +1,6 @@
 const { sklLogin } = require("./login.js");
 const { getRandomString } = require("../utils/random.js");
+const fetch = require('node-fetch');
 
 const payload = {
 	"currentLocation": "浙江省杭州市钱塘区",

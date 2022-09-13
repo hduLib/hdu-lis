@@ -10,9 +10,9 @@
 * return the encrypted string 
 */
 function strEnc(data) {
-  const firstKey="1";
-  const secondKey="2";
-  const thirdKey="3";
+  const firstKey = "1";
+  const secondKey = "2";
+  const thirdKey = "3";
   var leng = data.length;
   var encData = "";
   var firstKeyBt, secondKeyBt, thirdKeyBt, firstLength, secondLength, thirdLength;
