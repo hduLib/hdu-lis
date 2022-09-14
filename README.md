@@ -5,7 +5,15 @@ life is short, you need lis:)
 
 ## 使用方法
 
-> 功能使用fetch，需要nodejs 18.0以上版本
+```js
+const {casLogin} = require("./casLogin.js")
+
+const url ="https://cas.hdu.edu.cn/cas/login?********************"
+
+casLogin(url,your_id, your_pw).then(res =>{
+  console.log(res.headers)
+})
+```
 
 # skl sign
 
@@ -20,4 +28,11 @@ sklSign(your_id, your_pw).then((res) => {
 //返回值为200即打卡成功
 ```
 
-> 返回值为200即打印成功
+
+## 感谢
+
+本项目得到了很多大佬的帮助，在此一并列出并感谢
+
+- @BaiMeow
+- @Camera-2018
+- @AkaAny
