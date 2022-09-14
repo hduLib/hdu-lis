@@ -1,12 +1,19 @@
-# hdu-lis
+# HduLis
 life is short, you need lis:)
 
-# cas login
+# Usage
 
-## 使用方法
+## Installation
+
+```bash
+  npm i hdu-lis
+```
+
+## Cas login
+
 
 ```js
-const {casLogin} = require("./casLogin.js")
+const {casLogin} = require("hdu-lis")
 
 const url ="https://cas.hdu.edu.cn/cas/login?********************"
 
@@ -15,23 +22,22 @@ casLogin(url,your_id, your_pw).then(res =>{
 })
 ```
 
-# skl sign
+## Skl sign
 
-## 使用方法
 
 ```js
-const { sklSign } = require("./sign.js");
+const { sklSign } = require("hdu-lis");
 
 sklSign(your_id, your_pw).then((res) => {
   console.log(res);
 })
-//返回值为200即打卡成功
+//return 200
 ```
 
 
-## 感谢
+# Thx
 
-本项目得到了很多大佬的帮助，在此一并列出并感谢
+Thanks to the followings for their help.
 
 - @BaiMeow
 - @Camera-2018
