@@ -26,8 +26,6 @@ async function phyExpt(username, password='123456') {
     let course={};
     expts.forEach((items, indexs) => {
         const dictNames = ['id','course','teacher','group','place','time','status','score','detail','option'];
-        
-        
         course[dictNames[(indexs)%10]] = items.textContent;
         if(indexs%10==9){
           courses.push(course); 
