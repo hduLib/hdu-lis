@@ -1,6 +1,6 @@
 {
   "name": "hdu-lis",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "lif is short, you need lis:)",
   "main": "index.js",
   "scripts": {

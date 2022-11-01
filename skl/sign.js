@@ -15,17 +15,22 @@ const payload = {
 }
 
 async function sklSign(username,password) {
-  const token = await sklLogin(username,password)
-  const res = await fetch("https://skl.hdu.edu.cn/api/punch",{
-    method: 'POST',
-    body: JSON.stringify(payload),
-    headers: {
-      'Content-Type': 'application/json',
-      'x-auth-token': token,
-      'skl-ticket': getRandomString(21)
-    }
-  })
-  return res.status
+  try{
+    const token = await sklLogin(username,password)
+    const res = await fetch("https://skl.hdu.edu.cn/api/punch",{
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': token,
+        'skl-ticket': getRandomString(21)
+      }
+    })
+    return res.status
+  }catch(err){
+    console.log(err)
+    return err
+  }
 }
 
 
