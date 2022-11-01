@@ -3,7 +3,7 @@ const {phyLogin} = require('./login');
 const xpath = require('xpath');
 const dom = require('xmldom').DOMParser;
 
-async function getExpt(username, password='123456') {
+async function phyExpt(username, password='123456') {
   try {
     const cookie = await phyLogin(username, password);
     const url = "http://phy.hdu.edu.cn/phymember/expt_schedule_student.jspx";
@@ -38,5 +38,5 @@ async function getExpt(username, password='123456') {
 }
 
 module.exports={
-  getExpt
+  phyExpt
 }
