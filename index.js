@@ -1,4 +1,4 @@
-const {casLogin} = require("./cas/casLogin")
+const {casLogin} = require("./hdu/cas/casLogin")
 const {sklLogin} = require("./skl/login")
 const {sklSign} = require("./skl/sign")
 

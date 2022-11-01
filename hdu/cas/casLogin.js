@@ -1,4 +1,4 @@
-const { strEnc } = require("../utils/des.js");
+const { strEnc } = require("../../utils/des.js");
 const qs = require("qs");
 const fetch = require('node-fetch');
 
@@ -23,7 +23,7 @@ async function casLogin(url, username, password) {
     const request = await fetch(url,{
       method: 'POST',
       body: qs.stringify(formData),//x-www-form-urlencoded
-      credentials: 'include',//允许携带cookie
+      credentials: 'include',//允许携带cookie but node-fetch does not support mode, cache or credentials options
       redirect: 'manual', //禁止重定向
       headers: {
         'Host': 'cas.hdu.edu.cn',

@@ -4,7 +4,8 @@
   "description": "lif is short, you need lis:)",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "build": "ncc build index.js -o dist"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,10 @@
   },
   "homepage": "https://github.com/MarleneJiang/hdu-lis#readme",
   "dependencies": {
+    "form-data": "^4.0.0",
     "node-fetch": "^2.6.7",
-    "qs": "^6.11.0"
+    "qs": "^6.11.0",
+    "xmldom": "^0.6.0",
+    "xpath": "^0.0.32"
   }
 }
