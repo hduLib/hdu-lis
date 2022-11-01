@@ -23,11 +23,16 @@ async function phyExpt(username, password='123456') {
 
     const expts = xpath.select("/html/body/div[2]/div[2]/div[4]/table/tbody/tr/td", doc);
     const courses = [];
+    let course={};
     expts.forEach((items, indexs) => {
         const dictNames = ['id','course','teacher','group','place','time','status','score','detail','option'];
-        const course={}
+        
+        
         course[dictNames[(indexs)%10]] = items.textContent;
-        courses.push(course);      
+        if(indexs%10==9){
+          courses.push(course); 
+          course = {};
+        }
     });
 
     return courses

@@ -34,7 +34,7 @@ sklSign(your_id, your_pw).then((res) => {
 //return 200
 ```
 
-## Phy sign
+## Phy login
 
 > http://phy.hdu.edu.cn/
 
