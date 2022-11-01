@@ -76,6 +76,5 @@ async function getFormData(url) {
 
 module.exports = {
 
-  casLogin,
-  getFormData,
+  casLogin
 }

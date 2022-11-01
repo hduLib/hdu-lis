@@ -61,6 +61,5 @@ async function getCookie(){
 }
 
 module.exports={
-  getCookie,
   phyLogin
 }
