@@ -2,11 +2,12 @@ const { sklLogin } = require("./login.js");
 const { getRandomString } = require("../utils/random.js");
 const fetch = require('node-fetch');
 const {phyExpt} = require('../hdu/phy/expt.js');
+const getChineseDate = require('../utils/date.js');
 
 async function sklCourses(username,password,withExpt=false,exptPwd="123456") {
   try{
     const token = await sklLogin(username,password)
-    const date = new Date(new Date().getTime()-(3600*1000*24* (new Date().getDay()-1)));
+    const date = new Date(getChineseDate().getTime()-(3600*1000*24* (getChineseDate().getDay()-1)));
     const url = "https://skl.hdu.edu.cn/api/course?startTime="+date.getFullYear().toString()+'-'+(date.getMonth()+1).toString()+'-'+date.getDate().toString();
     const res = await fetch(url,{
       headers: {
@@ -53,7 +54,7 @@ async function sklTodayCourses(username,password,withExpt=false,exptPwd="123456"
     const cousers = (await sklCourses(username,password,withExpt,exptPwd)).list;
     const todayCourse = [];
     cousers.forEach((course) => {
-      if(course.weekDay==new Date().getDay()){
+      if(course.weekDay==getChineseDate().getDay()){
         todayCourse.push(course);
       }
     })
@@ -82,7 +83,7 @@ async function sklNowCourses(username,password,withExpt=false,exptPwd="123456") 
 }
 
 function compareNowTime(time){
-  const nowTime = new Date();
+  const nowTime = getChineseDate();
   const time2 = nowTime.getHours()*60+nowTime.getMinutes();
   const time1 = time[0]*60+time[1];
   if(time1<time2){
