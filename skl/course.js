@@ -58,6 +58,10 @@ async function sklTodayCourses(username,password,withExpt=false,exptPwd="123456"
         todayCourse.push(course);
       }
     })
+    // 根据startSection排序
+    todayCourse.sort((a,b)=>{
+      return a.startSection-b.startSection
+    })
     return todayCourse
   }catch(err){
     console.log(err)
