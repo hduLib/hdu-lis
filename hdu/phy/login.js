@@ -3,7 +3,6 @@ const fetch = require('node-fetch');
 const {ocr} = require("../../utils/ocr.js");
 
 async function phyLogin(username, password='123456') {
-  try {
     const CookieWithCaptcha = await getCookie();
     const url = "http://phy.hdu.edu.cn/login.jspx";
     const formData = {
@@ -34,15 +33,10 @@ async function phyLogin(username, password='123456') {
     }else{
       return request
     }
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
 }
 
 
 async function getCookie(){
-  try{
     // get img
     const url = "http://phy.hdu.edu.cn/captcha.svl";
     const request = await fetch(url);
@@ -54,10 +48,6 @@ async function getCookie(){
     formData["cookie"] = 'clientlanguage=zh_CN; '+request.headers.get('set-cookie');
     formData["captcha"] = code;
     return formData;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
 }
 
 module.exports={

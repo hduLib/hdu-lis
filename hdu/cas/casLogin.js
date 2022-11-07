@@ -3,7 +3,6 @@ const qs = require("qs");
 const fetch = require('node-fetch');
 
 async function casLogin(url, username, password) {
-  try {
     const ul = username.length;
     const pl = password.length;
     const formDataHidden = await getFormData(url);
@@ -38,20 +37,15 @@ async function casLogin(url, username, password) {
     });
     if(request.status != 302){
       if(request.status == 403 || request.status == 200){
-        throw '数字杭电登录账户或密码错误';
+        throw new Error('数字杭电登录账户或密码错误');
       }else{
-        throw 'casLogin '+request.statusText;
+        throw new Error('casLogin '+request.statusText);
       }
     }
     return request
-  } catch (err) {
-    console.log(err)
-    return err
-  }
 }
 
 async function getFormData(url) {
-  try {
     const request = await fetch(url);
     const data = await request.text();
     let reg = /<input type="hidden" name="(.*)" value="(.*)"/g;
@@ -73,11 +67,6 @@ async function getFormData(url) {
     }
     formData["cookie"] = request.headers.get('set-cookie');
     return formData
-  }
-  catch (err) {
-    console.log(err)
-    return err
-  }
 }
 
 module.exports = {

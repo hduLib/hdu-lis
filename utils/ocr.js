@@ -2,7 +2,6 @@ const fetch = require('node-fetch');
 const FormData = require('form-data');     
 
 async function ocr(img){
-  try{
     const form = new FormData();
     form.append("file", img, "img.jpg");
     const request = await fetch('https://aicode.my-youth.cn/up_file',{
@@ -15,10 +14,6 @@ async function ocr(img){
     });
     const res = await request.json();
     return res;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
 }
 
 module.exports = {

@@ -15,7 +15,6 @@ const payload = {
 }
 
 async function sklSign(username,password) {
-  try{
     const token = await sklLogin(username,password)
     const res = await fetch("https://skl.hdu.edu.cn/api/punch",{
       method: 'POST',
@@ -27,10 +26,6 @@ async function sklSign(username,password) {
       }
     })
     return res.status
-  }catch(err){
-    console.log(err)
-    return err
-  }
 }
 
 

@@ -5,7 +5,6 @@ const {phyExpt} = require('../hdu/phy/expt.js');
 const getChineseDate = require('../utils/date.js');
 
 async function sklCourses(username,password,withExpt=false,exptPwd="123456") {
-  try{
     const token = await sklLogin(username,password)
     const date = new Date(getChineseDate().getTime()-(3600*1000*24* (getChineseDate().getDay()-1)));
     const url = "https://skl.hdu.edu.cn/api/course?startTime="+date.getFullYear().toString()+'-'+(date.getMonth()+1).toString()+'-'+date.getDate().toString();
@@ -43,14 +42,9 @@ async function sklCourses(username,password,withExpt=false,exptPwd="123456") {
       }
     }
     return courses
-  }catch(err){
-    console.log(err)
-    return err
-  }
 }
 
 async function sklTodayCourses(username,password,withExpt=false,exptPwd="123456") {
-  try{
     const cousers = (await sklCourses(username,password,withExpt,exptPwd)).list;
     const todayCourse = [];
     cousers.forEach((course) => {
@@ -63,14 +57,9 @@ async function sklTodayCourses(username,password,withExpt=false,exptPwd="123456"
       return a.startSection-b.startSection
     })
     return todayCourse
-  }catch(err){
-    console.log(err)
-    return err
-  }
 }
 
 async function sklNowCourses(username,password,withExpt=false,exptPwd="123456") {
-  try{
     const cousers = await sklTodayCourses(username,password,withExpt,exptPwd);
     const NowCourse = [];
     const startTime = [[8,5],[8,55],[10,0],[10,50],[11,40],[13,30],[14,20],[15,15],[16,5],[18,30]];
@@ -80,10 +69,6 @@ async function sklNowCourses(username,password,withExpt=false,exptPwd="123456") 
       }
     })
     return NowCourse
-  }catch(err){
-    console.log(err)
-    return err
-  }
 }
 
 function compareNowTime(time){

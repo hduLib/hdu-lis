@@ -4,7 +4,6 @@ const xpath = require('xpath');
 const dom = require('xmldom').DOMParser;
 
 async function phyExpt(username, password='123456') {
-  try {
     const cookie = await phyLogin(username, password);
     const url = "http://phy.hdu.edu.cn/phymember/expt_schedule_student.jspx";
     const request = await fetch(url, {
@@ -34,10 +33,6 @@ async function phyExpt(username, password='123456') {
     });
 
     return courses
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
 }
 
 module.exports={

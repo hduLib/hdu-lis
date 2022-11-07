@@ -3,19 +3,13 @@ const fetch = require('node-fetch');
 
 
 async function getCasLoginUrl(){
-  try{
     let api = await fetch("https://skl.hdu.edu.cn/api/userinfo?type=&index=passcard.html")
     const url = (await api.json()).url
     return url
-  }catch(err){
-    console.log(err)
-    return err
-  }
 }
 
 // 返回已登陆的token
 async function sklLogin(username,password){
-  try{
     const url = await getCasLoginUrl()
     const cas = await casLogin(url,username,password)
     const cookie = cas.headers.get("set-cookie")
@@ -34,10 +28,6 @@ async function sklLogin(username,password){
       }
     })
     return res.headers.get("x-auth-token")
-  }catch(err){
-    console.log(err)
-    return err
-  }
 }
 
 module.exports = {
