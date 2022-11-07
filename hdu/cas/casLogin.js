@@ -36,7 +36,13 @@ async function casLogin(url, username, password) {
         'Cookie':cookie
       }
     });
-
+    if(request.status != 302){
+      if(request.status == 403 || request.status == 200){
+        throw '数字杭电登录账户或密码错误';
+      }else{
+        throw 'casLogin '+request.statusText;
+      }
+    }
     return request
   } catch (err) {
     console.log(err)

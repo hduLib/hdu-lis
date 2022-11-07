@@ -4,6 +4,7 @@ const {sklSign} = require("./skl/sign")
 const {phyLogin} = require("./hdu/phy/login")
 const {phyExpt} = require("./hdu/phy/expt")
 const {sklCourses,sklTodayCourses,sklNowCourses} = require("./skl/course")
+const {sklPasscard,sklPunch} = require("./skl/passcard")
 
 module.exports = {
   casLogin,
@@ -13,5 +14,7 @@ module.exports = {
   phyExpt,
   sklCourses,
   sklTodayCourses,
-  sklNowCourses
+  sklNowCourses,
+  sklPasscard,
+  sklPunch
 }
