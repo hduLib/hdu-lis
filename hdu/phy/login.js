@@ -40,6 +40,9 @@ async function getCookie(){
     // get img
     const url = "http://phy.hdu.edu.cn/captcha.svl";
     const request = await fetch(url);
+    if(request.status == 404){
+      throw new Error('大物实验网站已关闭');
+    }
     const img = await request.buffer();
     // ocr
     const code = await ocr(img);

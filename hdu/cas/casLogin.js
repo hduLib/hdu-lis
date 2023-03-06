@@ -38,6 +38,8 @@ async function casLogin(url, username, password) {
     if(request.status != 302){
       if(request.status == 403 || request.status == 200){
         throw new Error('数字杭电登录账户或密码错误');
+      }else if (request.status == 404){
+        throw new Error('数字杭电登录网站已关闭');
       }else{
         throw new Error('casLogin '+request.statusText);
       }

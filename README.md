@@ -78,8 +78,7 @@ phyExpt(your_id, your_pw).then((res) => {
 ```js
 const { sklCourses } = require("hdu-lis");
 
-// true for all courses (have experiment), if you have changed the phy.hdu.edu.cn's password , you should add an argument phy_pw
-sklCourses(your_id, your_pw,true).then((res) => {
+sklCourses(your_id, your_pw).then((res) => {
   console.log(res);
 })
 ```
@@ -91,8 +90,7 @@ sklCourses(your_id, your_pw,true).then((res) => {
 ```js
 const { sklTodayCourses } = require("hdu-lis");
 
-// true for all courses (have experiment), if you have changed the phy.hdu.edu.cn's password , you should add an argument phy_pw
-sklTodayCourses(your_id, your_pw,true).then((res) => {
+sklTodayCourses(your_id, your_pw).then((res) => {
   console.log(res);
 })
 ```
@@ -104,8 +102,7 @@ sklTodayCourses(your_id, your_pw,true).then((res) => {
 ```js
 const { sklNowCourses } = require("hdu-lis");
 
-// true for all courses (have experiment), if you have changed the phy.hdu.edu.cn's password , you should add an argument phy_pw
-sklNowCourses(your_id, your_pw,true).then((res) => {
+sklNowCourses(your_id, your_pw).then((res) => {
   console.log(res);
 })
 ```

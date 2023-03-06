@@ -1,12 +1,11 @@
 const { sklLogin } = require("./login.js");
 const { getRandomString } = require("../utils/random.js");
 const fetch = require('node-fetch');
-const {phyExpt} = require('../hdu/phy/expt.js');
 const getChineseDate = require('../utils/date.js');
 
-async function sklCourses(username,password,withExpt=false,exptPwd="123456") {
+async function sklCourses(username,password) {
     const token = await sklLogin(username,password)
-    const date = new Date(getChineseDate().getTime()-(3600*1000*24* (getChineseDate().getDay()-1)));
+    const date = new Date(getChineseDate().getTime()-(3600*1000*24* ((getChineseDate().getDay()==0?7:getChineseDate().getDay())-1)));
     const url = "https://skl.hdu.edu.cn/api/course?startTime="+date.getFullYear().toString()+'-'+(date.getMonth()+1).toString()+'-'+date.getDate().toString();
     const res = await fetch(url,{
       headers: {
@@ -15,60 +14,51 @@ async function sklCourses(username,password,withExpt=false,exptPwd="123456") {
         'skl-ticket': getRandomString(21)
       }
     })
-    let courses = await res.json();
-    let map = new Map();
-    (courses.list).forEach((item,index)=>{
-      if (!map.has(item.courseName) && item.weekDay!=6 && item.weekDay!=7) {
-        map.set(item.courseName,item)
-      }
+    let i = await res.json();
+    return i;
+}
+
+async function sklTodayCourses(username,password) {
+    const i = (await sklCourses(username,password));
+    let l = {};
+    i.list.forEach(o=>{
+        l[o.courseId] = o
     })
-    courses.list = [...map.values()];
-    // 集成大物实验课程
-    if(!!withExpt){
-      
-      for(let i in courses.list) {
-        if(courses.list[i].classRoom=="大学物理实验中心"){
-          const expts = await phyExpt(username,exptPwd);
-          const reg = /第(.*)周：/;
-          expts.forEach((expt,index)=>{
-            const weekDay = (reg.exec(expt.time))[1];
-            if(weekDay==courses.week.toString()){
-              courses.list[i].courseName = expt.course;
-              courses.list[i].teacherName = expt.teacher;
-              courses.list[i].classRoom = expt.place;
-            }
-          })
-        }
-      }
+
+    let classes =[]
+    let detail={}
+    let active= getChineseDate().getDay()==0?6:getChineseDate().getDay()-1;
+    
+    function forenoon() {
+      return classes.filter(t=>t.startSection <= 5 && t.weekDay - 1 === active).sort((t,e)=>t.startSection - e.startSection)
     }
-    return courses
+    function afternoonClasses() {
+      return classes.filter(t=>t.startSection >= 6 && t.startSection <= 9 && t.weekDay - 1 === active).sort((t,e)=>t.startSection - e.startSection)
+    }
+    function nightClasses() {
+      return classes.filter(t=>t.startSection > 9 && t.weekDay - 1 === active).sort((t,e)=>t.startSection - e.startSection)
+    }
+
+    detail = i;
+
+
+
+    classes = setCurrentClass(i);
+    i.list = [...forenoon(),...afternoonClasses(),...nightClasses()];
+    return i
 }
 
-async function sklTodayCourses(username,password,withExpt=false,exptPwd="123456") {
-    const cousers = (await sklCourses(username,password,withExpt,exptPwd)).list;
-    const todayCourse = [];
-    cousers.forEach((course) => {
-      if(course.weekDay==getChineseDate().getDay()){
-        todayCourse.push(course);
-      }
-    })
-    // 根据startSection排序
-    todayCourse.sort((a,b)=>{
-      return a.startSection-b.startSection
-    })
-    return todayCourse
-}
-
-async function sklNowCourses(username,password,withExpt=false,exptPwd="123456") {
-    const cousers = await sklTodayCourses(username,password,withExpt,exptPwd);
+async function sklNowCourses(username,password) {
+    const cousers = await sklTodayCourses(username,password);
     const NowCourse = [];
     const startTime = [[8,5],[8,55],[10,0],[10,50],[11,40],[13,30],[14,20],[15,15],[16,5],[18,30]];
-    cousers.forEach((course) => {
+    cousers.list.forEach((course) => {
       if(compareNowTime(startTime[course.startSection-1])){
         NowCourse.push(course);
       }
     })
-    return NowCourse
+    cousers.list = NowCourse;
+    return cousers
 }
 
 function compareNowTime(time){
@@ -80,6 +70,16 @@ function compareNowTime(time){
   }else{
     return true;
   }
+}
+
+function setCurrentClass(t) {
+  const e = t.week;
+  return t.list.filter(s=>{
+      let r = !0;
+      return s.period === "\u5355" ? r = e % 2 !== 0 : s.period === "\u53CC" && (r = e % 2 === 0),
+      e >= s.startWeek && e <= s.endWeek && r
+  }
+  )
 }
 
 module.exports = {
